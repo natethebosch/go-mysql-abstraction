@@ -7,6 +7,8 @@ import (
 )
 
 func TestStreaming(t *testing.T){
+	setup()
+
 	stream := BulkQuery("SELECT id,col1 FROM `test` WHERE id=1 OR id=2 ORDER BY id ASC")
 
 	for i := 0; i < 2; i++ {
@@ -28,6 +30,8 @@ func TestStreaming(t *testing.T){
 }
 
 func TestStreamingSequence(t *testing.T){
+	setup()
+
 	stream := BulkQuery("SELECT id,col1 FROM `test` WHERE id=1 OR id=2 ORDER BY id ASC")
 	var rw mysql.Row
 
@@ -41,6 +45,8 @@ func TestStreamingSequence(t *testing.T){
 }
 
 func TestStreamingMultiSegment(t *testing.T){
+	setup()
+
 	stream := BulkQuery("SELECT id,col1 FROM `test` WHERE id < 26 ORDER BY id ASC")
 	var rw mysql.Row
 
@@ -54,6 +60,8 @@ func TestStreamingMultiSegment(t *testing.T){
 }
 
 func TestStreamingInvalidQuery(t *testing.T){
+	setup()
+
 	stream := BulkQuery("SELECT INVALID QUERY")
 
 	select{

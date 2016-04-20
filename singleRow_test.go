@@ -3,6 +3,8 @@ package mysql
 import "testing"
 
 func TestSingleRowQuery(t *testing.T) {
+	setup()
+
 	r := QueryOneRow("SELECT id,col1 FROM `test` where id=1");
 
 	if r == nil {
@@ -11,6 +13,8 @@ func TestSingleRowQuery(t *testing.T) {
 }
 
 func TestSingleRowQueryMultiValue(t *testing.T) {
+	setup()
+
 	r := QueryOneRow("SELECT id,col1 FROM `test` where id=1 OR id=2");
 
 	if r == nil {
@@ -24,6 +28,8 @@ func TestSingleRowQueryMultiValue(t *testing.T) {
 }
 
 func TestSingleRowQueryNoValue(t *testing.T) {
+	setup()
+
 	r := QueryOneRow("SELECT id,col1 FROM `test` where id=-1");
 
 	if r != nil {
@@ -32,6 +38,8 @@ func TestSingleRowQueryNoValue(t *testing.T) {
 }
 
 func TestSingleRowQueryInvalidSyntax(t *testing.T) {
+	setup()
+
 	r := QueryOneRow("SELECT INVALID SYNTAX");
 
 	if r != nil {

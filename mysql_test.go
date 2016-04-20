@@ -9,6 +9,7 @@ import (
 
 func setup() {
 	// nothing
+	SetConnectionInfo("127.0.0.1:3306", "root", "Theuser1", "blue-giraffe")
 }
 
 func teardown(){

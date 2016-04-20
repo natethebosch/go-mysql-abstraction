@@ -16,6 +16,11 @@ const connectionPool = 20
 // channel to retrieve a connection from the pool
 var conn chan mysql.Conn
 
+var svr string
+var usr string
+var pwd string
+var db string
+
 func prep(){
 	isInit = true
 	conn = make(chan mysql.Conn, connectionPool)
@@ -28,8 +33,15 @@ func prep(){
 	}()
 }
 
+func SetConnectionInfo(server string, user string, password string, database string){
+	svr = server
+	usr = user
+	pwd = password
+	db = database
+}
+
 func newConnection() (mysql.Conn) {
-	conn := mysql.New("tcp", "", "127.0.0.1:3306", "root", "Theuser1", "blue-giraffe")
+	conn := mysql.New("tcp", "", svr, usr, pwd, db)
 	conn.Connect()
 	return conn
 }
